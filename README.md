@@ -1,2 +1,2 @@
-# ep2
-Códigos referentes aos exercícios do EP2
+# EP2
+Códigos referentes ao EP2, segundo projeto da disciplina de Design de Software (ENG - Insper)
