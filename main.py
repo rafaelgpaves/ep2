@@ -14,8 +14,6 @@ paises = normaliza(continentes)
 
 raio_terra = 6371
 
-paises_e_distancias = []
-
 print("Um país foi escolhido, tente adivinhá-lo!")
 
 """criando banco de dicas"""
@@ -32,7 +30,7 @@ while jogo:
     pais_sorteado = sorteia_pais(paises)
     lat1 = paises[pais_sorteado]["geo"]["latitude"] #latitude do pais sorteado
     long1 = paises[pais_sorteado]["geo"]["longitude"] #longitude do pais sorteado
-
+    paises_e_distancias = [] #lista que guarda os paises ja tentados pelo jogador
 
     rodada = True
     while rodada:
@@ -73,8 +71,13 @@ while jogo:
                         cor = "blue"
                     print(colored("{} --> {}".format(pais[1], pais[0]), cor, attrs=["bold"]))
 
-    de_novo = input("Quer jogar de novo? [s/n] ")    
-    if de_novo.lower() == "s":
-        rodada = True
-    elif de_novo.lower() == "n":
-        jogo = False
+    entrada_valida = True
+    while entrada_valida:
+        de_novo = input("Quer jogar de novo? [s/n] ")    
+        if de_novo.lower() == "s":
+            entrada_valida = False
+        elif de_novo.lower() == "n":
+            entrada_valida = False
+            jogo = False
+        else:
+            print("Digite apenas 's' ou 'n'")
