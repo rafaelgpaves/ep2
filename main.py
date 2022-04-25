@@ -1,9 +1,17 @@
-"""importando funcoes:"""
+"""importando funcoes e os dados dos paises:"""
 from funcoes import *
+import json
+
+with open("dados.json", "r") as arquivo:
+    dados = arquivo.read()
+continentes = json.loads(dados)
 
 """condicoes iniciais do jogo:"""
 tentativas = 20 #variavel que guarda o numero de tentativas restantes do jogador
-pais_sorteado = sorteia_pais()
+
+paises = normaliza(continentes)
+pais_sorteado = sorteia_pais(paises)
+print(pais_sorteado)
 
 print("Um país foi escolhido, tente adivinhar!")
 
