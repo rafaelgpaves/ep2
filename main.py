@@ -73,7 +73,7 @@ while jogo:
                         cor = "blue"
                     print(colored("{} --> {}".format(pais[1], pais[0]), cor, attrs=["bold"]))
 
-    de_novo = input("Quer jogar de novo? [s/n]")    
+    de_novo = input("Quer jogar de novo? [s/n] ")    
     if de_novo.lower() == "s":
         rodada = True
     elif de_novo.lower() == "n":
