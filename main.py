@@ -2,6 +2,7 @@
 from funcoes import *
 import json
 from tabulate import tabulate
+from termcolor import colored
 
 with open("dados.json", "r") as arquivo:
     dados = arquivo.read()
@@ -47,18 +48,18 @@ while jogo:
             long2 = paises[entrada]["geo"]["longitude"] #longitude do pais que o usuario digitou
             d = haversine(raio_terra, lat1, long1, lat2, long2)
 
-            if d <= 1000:
-                cor = 32
-            elif d < 2500:
-                cor = 33
-            elif d <= 5000:
-                cor = 31
-            elif d <= 10000:
-                cor = 35
-            else:
-                cor = 34
-
             adiciona_em_ordem(entrada, d, paises_e_distancias)
 
             for pais in paises_e_distancias:
-                print(('\033[0;{};40m {} \033[0;0m').format(cor, "{} --> {}".format(d, pais)))
+
+                if pais[1] <= 1000:
+                    cor = "green"
+                elif pais[1] < 2500:
+                    cor = "yellow"
+                elif pais[1] <= 5000:
+                    cor = "red"
+                elif pais[1] <= 10000:
+                    cor = "magenta"
+                else:
+                    cor = "blue"
+                print(colored("{} --> {}".format(pais[1], pais[0]), cor, attrs=["bold"]))
