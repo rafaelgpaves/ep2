@@ -39,6 +39,7 @@ while jogo:
         jogo = False
     elif entrada == "dica":
         print(tabela_dicas)
+        dica_escolhida = int(input("\nEscolha uma dica! (1/2/3/4/5/0)\n >>> "))
     else:
 
         if entrada in paises and esta_na_lista(entrada, paises_e_distancias) == False:
