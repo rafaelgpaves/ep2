@@ -23,6 +23,7 @@ print("Um país foi escolhido, tente adivinhá-lo!")
 dicas = [["1", "Cor da Bandeira", "4 tentativas"], ["2", "Letra da capital", "3 tentativas"], ["3", "Área", "6 tentativas"],["4", "População", "5 tentativas"],["5", "Continente", "7 tentativas"], ["0", "Sem dica", "0 tentativas"]] 
 tabela_dicas = tabulate(dicas, headers=["Índice", "Dica", "Custo"])
 
+
 """o jogo:"""
 jogo = True
 while jogo:
@@ -35,7 +36,6 @@ while jogo:
     else:
         if entrada in paises and esta_na_lista(entrada, ) == False:
             tentativas -= 1
-
             lat2 = paises[entrada]["geo"]["latitude"] #latitude do pais que o usuario digitou
             long2 = paises[entrada]["geo"]["longitude"] #longitude do pais que o usuario digitou
             d = haversine(raio_terra, lat1, long1, lat2, long2)
