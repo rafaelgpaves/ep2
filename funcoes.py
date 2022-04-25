@@ -47,6 +47,8 @@ def esta_na_lista(nome_pais, paises):
 
     return False
 
+###
+
 def normaliza(continentes):
     normalizado = {}
     for continente in continentes:
