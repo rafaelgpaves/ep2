@@ -55,6 +55,10 @@ while jogo:
                 long2 = paises[entrada]["geo"]["longitude"] #longitude do pais que o usuario digitou
                 d = haversine(raio_terra, lat1, long1, lat2, long2)
 
+                if d == 0:
+                    print("Você acertou, parabéns!")
+                    rodada = False
+
                 adiciona_em_ordem(entrada, d, paises_e_distancias)
 
                 for pais in paises_e_distancias:
