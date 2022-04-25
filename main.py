@@ -9,6 +9,8 @@ continentes = json.loads(dados)
 """condicoes iniciais do jogo:"""
 tentativas = 20 #variavel que guarda o numero de tentativas restantes do jogador
 
+raio_terra = 6371
+
 paises = normaliza(continentes)
 pais_sorteado = sorteia_pais(paises)
 print(pais_sorteado)
