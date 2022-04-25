@@ -1,6 +1,4 @@
-EARTH_RADIUS = 6371
-
-DADOS = {
+{
   "asia": {
     "afeganistao": {
       "area": 652230,
