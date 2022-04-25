@@ -29,5 +29,3 @@ def sorteia_letra(pais, letras_restritas):
         if letra.lower() not in letras_restritas and letra not in caracteres_especiais:
 
             return letra
-            
-print(sorteia_letra("Andorra a-Velha", ['a', 'r']))
