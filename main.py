@@ -14,12 +14,7 @@ paises = normaliza(continentes)
 
 raio_terra = 6371
 
-print("Um país foi escolhido, tente adivinhá-lo!")
-
-"""criando banco de dicas"""
-dicas = [["1", "Cor da Bandeira", "4 tentativas"], ["2", "Letra da capital", "3 tentativas"], ["3", "Área", "6 tentativas"],["4", "População", "5 tentativas"],["5", "Continente", "7 tentativas"], ["0", "Sem dica", "0 tentativas"]] 
-tabela_dicas = tabulate(dicas, headers=["Índice", "Dica", "Custo"])
-
+print("\nUm país foi escolhido, tente adivinhá-lo!")
 
 """o jogo:"""
 jogo = True
@@ -31,11 +26,12 @@ while jogo:
     lat1 = paises[pais_sorteado]["geo"]["latitude"] #latitude do pais sorteado
     long1 = paises[pais_sorteado]["geo"]["longitude"] #longitude do pais sorteado
     paises_e_distancias = [] #lista que guarda os paises ja tentados pelo jogador
+    cores_ja_informadas = []
 
     rodada = True
     while rodada:
         print("Você tem {} tentativas".format(tentativas))
-        entrada = input("Qual o seu palpite? ")
+        entrada = input("Qual o seu palpite? (comandos: 'dica' ou 'desisto')\n>>> ").lower()
         if entrada == "desisto":
 
             print("O país era {}".format(pais_sorteado))
@@ -43,8 +39,20 @@ while jogo:
             rodada = False
 
         elif entrada == "dica":
-            print(tabela_dicas)
-            dica_escolhida = int(input("\nEscolha uma dica! (1/2/3/4/5/0)\n >>> "))
+            while True:
+                dica_escolhida = int(input("\nEscolha uma dica! (1/2/3/4/5/0)\n>>> "))
+                if dica_escolhida not in (1, 2, 3, 4, 5, 0):
+                    continue
+                else:
+                    if dica_escolhida == 1:
+                        cores_bandeira = []
+                        for cor in paises[pais_sorteado]["bandeira"]:
+                            if paises[pais_sorteado]["bandeira"][cor] != 0:
+                                cores_bandeira.append(cor)
+                            cor_sorteada = choice(cores_bandeira)
+                            cores_ja_informadas.append(cor_sorteada)
+                        print("\n A bandeira do país sorteado possui a cor {}.".format(cor_sorteada))
+
 
         else:
 
@@ -73,14 +81,15 @@ while jogo:
                         cor = "magenta"
                     else:
                         cor = "blue"
-                    print(colored("{} --> {}".format(pais[1], pais[0]), cor, attrs=["bold"]))
+                    print(colored("{}  --> {} m".format(pais[0]), int(pais[1])), cor, attrs=["bold"])
 
     entrada_valida = True
     while entrada_valida:
-        de_novo = input("Quer jogar de novo? [s/n] ")    
+        de_novo = input("Quer jogar de novo? [s/n] ").lower() 
         if de_novo.lower() == "s":
             entrada_valida = False
         elif de_novo.lower() == "n":
+            print("\nObrigado por jogar!")
             entrada_valida = False
             jogo = False
         else:
