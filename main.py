@@ -30,6 +30,13 @@ while jogo:
     rodada = True
     while rodada:
         print("Você tem {} tentativas".format(tentativas))
+
+        if tentativas == 0:
+
+            print("Acabaram as tentativas, que pena!")
+            print("O país era {}".format(pais_sorteado))
+            rodada = False
+
         entrada = input("Qual o seu palpite? (comandos: 'dica' ou 'desisto')\n>>> ").lower()
         if entrada == "desisto":
 
