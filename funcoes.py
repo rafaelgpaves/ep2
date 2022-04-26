@@ -105,7 +105,3 @@ def dicas(tentativas):
     for tipo_de_dica in banco_de_dicas:
         if banco_de_dicas[tipo_de_dica][1] < tentativas:
             x.add_row([banco_de_dicas[tipo_de_dica], banco_de_dicas[tipo_de_dica][0], str(banco_de_dicas[tipo_de_dica][1]) + " tentativas"])
-    print(x)
-    if
-    dica_escolhida = int(input("\nEscolha uma dica! (1/2/3/4/5/0)"))
-    if dica_escolhida not in (1, 2, 3, 4, 5, 0)
