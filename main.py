@@ -93,6 +93,14 @@ while jogo:
                         cor = "blue"
                     print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
 
+            elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
+
+                print("Você já digitou esse país")
+
+            else:
+
+                print("Esse país não consta no banco de dados")
+
     entrada_valida = True
     while entrada_valida:
         de_novo = input("Quer jogar de novo? [s/n] ").lower() 
