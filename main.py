@@ -1,7 +1,6 @@
 """importando funcoes e os dados dos paises:"""
 from funcoes import *
 import json
-from tabulate import tabulate
 from termcolor import colored
 
 with open("dados.json", "r") as arquivo:
@@ -41,18 +40,21 @@ while jogo:
         elif entrada == "dica":
             dicas(tentativas)
             while True:
-                dica_escolhida = int(input("\nEscolha uma dica! [1/2/3/4/5/0]\n>>> "))
-                if dica_escolhida not in (1, 2, 3, 4, 5, 0):
+                dica_escolhida = input("\nEscolha uma dica! [1/2/3/4/5/0]\n>>> ")
+                if dica_escolhida not in ("1", "2", "3", "4", "5", "0"):
+                    print("\nDesculpe, mas esse input é inválido\n")
                     continue
                 else:
-                    if dica_escolhida == 1:
+                    if dica_escolhida == "1":
+                        tentativas -= 4
                         cores_bandeira = []
                         for cor in paises[pais_sorteado]["bandeira"]:
                             if paises[pais_sorteado]["bandeira"][cor] != 0:
                                 cores_bandeira.append(cor)
                             cor_sorteada = choice(cores_bandeira)
                             cores_ja_informadas.append(cor_sorteada)
-                        print("\n A bandeira do país sorteado possui a cor {}.".format(cor_sorteada))
+                        print("\nA bandeira do país sorteado possui a cor {}\n".format(cor_sorteada))
+                        break
 
 
         else:
