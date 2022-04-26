@@ -39,8 +39,9 @@ while jogo:
             rodada = False
 
         elif entrada == "dica":
+            dicas(tentativas)
             while True:
-                dica_escolhida = int(input("\nEscolha uma dica! (1/2/3/4/5/0)\n>>> "))
+                dica_escolhida = int(input("\nEscolha uma dica! [1/2/3/4/5/0]\n>>> "))
                 if dica_escolhida not in (1, 2, 3, 4, 5, 0):
                     continue
                 else:
@@ -81,7 +82,7 @@ while jogo:
                         cor = "magenta"
                     else:
                         cor = "blue"
-                    print(colored("{}  --> {} km".format(pais[0]), int(pais[1])), cor, attrs=["bold"])
+                    print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
 
     entrada_valida = True
     while entrada_valida:
