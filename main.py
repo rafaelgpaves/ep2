@@ -81,7 +81,7 @@ while jogo:
                         cor = "magenta"
                     else:
                         cor = "blue"
-                    print(colored("{}  --> {} m".format(pais[0]), int(pais[1])), cor, attrs=["bold"])
+                    print(colored("{}  --> {} km".format(pais[0]), int(pais[1])), cor, attrs=["bold"])
 
     entrada_valida = True
     while entrada_valida:
