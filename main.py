@@ -20,12 +20,13 @@ jogo = True
 while jogo:
 
     """condicoes da rodada atual:"""
-    tentativas = 20 #variavel que guarda o numero de tentativas restantes do jogador
-    pais_sorteado = sorteia_pais(paises)
-    lat1 = paises[pais_sorteado]["geo"]["latitude"] #latitude do pais sorteado
-    long1 = paises[pais_sorteado]["geo"]["longitude"] #longitude do pais sorteado
-    paises_e_distancias = [] #lista que guarda os paises ja tentados pelo jogador
-    cores_ja_informadas = []
+    tentativas = 20 # variável que guarda o número de tentativas restantes do jogador
+    pais_sorteado = sorteia_pais(paises) # país sorteado pelo jogo
+    lat1 = paises[pais_sorteado]["geo"]["latitude"] # latitude do país sorteado
+    long1 = paises[pais_sorteado]["geo"]["longitude"] # longitude do país sorteado
+    paises_e_distancias = [] # lista que guarda os países já tentados pelo jogador
+    cores_ja_informadas = [] # cores já informadas ao jogador pelo tipo de dica 1
+    dicas_solicitadas = [] # dicas (gerais) já informadas ao jogador pelo sistema
 
     rodada = True
     while rodada:
@@ -54,15 +55,28 @@ while jogo:
                     continue
                 else:
                     if dica_escolhida == "1":
-                        tentativas -= 4
-                        cores_bandeira = []
-                        for cor in paises[pais_sorteado]["bandeira"]:
-                            if paises[pais_sorteado]["bandeira"][cor] != 0:
-                                cores_bandeira.append(cor)
-                            cor_sorteada = choice(cores_bandeira)
-                            cores_ja_informadas.append(cor_sorteada)
-                        print("\nA bandeira do país sorteado possui a cor {}\n".format(cor_sorteada))
-                        break
+                        if tentativas <= 4:
+                            print("Desculpa, mas você nâo tem tentativas suficientes\n")
+                            break
+                        else:
+                            cores_bandeira = []
+                            if cores_bandeira != [] and len(cores_bandeira) == len(cores_ja_informadas):
+                                print("\nTodas as cores já foram informadas!\n")
+                                break
+                            else:
+                                tentativas -= 4
+                                for cor in paises[pais_sorteado]["bandeira"]:
+                                    if paises[pais_sorteado]["bandeira"][cor] != 0:
+                                        cores_bandeira.append(cor)
+                                cor_sorteada = choice(cores_bandeira)
+                                cor_repetida = cor_sorteada in cores_ja_informadas
+                                while cor_repetida == True:
+                                    cor_sorteada = choice(cores_bandeira)
+                                cores_ja_informadas.append(cor_sorteada)
+                                dica_bandeira = "\nA bandeira do país sorteado possui a cor {}\n".format(cor_sorteada)
+                                dicas_solicitadas.append(dica_bandeira)
+                                print(dica_bandeira)
+                                break
 
 
         else:
