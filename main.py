@@ -34,8 +34,6 @@ while jogo:
         if paises[pais_sorteado]["bandeira"][cor] != 0:
             cores_bandeira.append(cor)
 
-    print(pais_sorteado)
-
     rodada = True
     while rodada:
         print("Você tem {} tentativas".format(tentativas))
@@ -78,7 +76,7 @@ while jogo:
                                     cor_sorteada = choice(cores_bandeira)
                                     if cor_sorteada not in cores_ja_informadas:
                                         break
-                                    
+
                                 cores_ja_informadas.append(cor_sorteada)
                                 dica_bandeira = "\nA bandeira do país sorteado possui a cor {}\n".format(cor_sorteada)
                                 dicas_solicitadas.append(dica_bandeira)
@@ -101,6 +99,7 @@ while jogo:
 
                 adiciona_em_ordem(entrada, d, paises_e_distancias)
 
+                print("Distâncias: ")
                 for pais in paises_e_distancias:
 
                     if pais[1] <= 1000:
@@ -114,6 +113,12 @@ while jogo:
                     else:
                         cor = "blue"
                     print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
+
+                #imprimindo as dicas:
+                print("\nDicas: ")
+                if len(cores_ja_informadas) != 0:
+                    print(" - Cores da bandeira: " + ", ".join(cores_ja_informadas))
+                    #sera que eh mais facil fazer uma funcao para imprimir dicas?
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
