@@ -28,6 +28,14 @@ while jogo:
     cores_ja_informadas = [] # cores já informadas ao jogador pelo tipo de dica 1
     dicas_solicitadas = [] # dicas (gerais) já informadas ao jogador pelo sistema
 
+    #criando uma lista com as cores da bandeira do pais sorteado:
+    cores_bandeira = []
+    for cor in paises[pais_sorteado]["bandeira"]:
+        if paises[pais_sorteado]["bandeira"][cor] != 0:
+            cores_bandeira.append(cor)
+
+    print(pais_sorteado)
+
     rodada = True
     while rodada:
         print("Você tem {} tentativas".format(tentativas))
@@ -59,19 +67,18 @@ while jogo:
                             print("Desculpa, mas você nâo tem tentativas suficientes\n")
                             break
                         else:
-                            cores_bandeira = []
-                            if cores_bandeira != [] and len(cores_bandeira) == len(cores_ja_informadas):
+                            if len(cores_bandeira) == len(cores_ja_informadas):
                                 print("\nTodas as cores já foram informadas!\n")
                                 break
                             else:
                                 tentativas -= 4
-                                for cor in paises[pais_sorteado]["bandeira"]:
-                                    if paises[pais_sorteado]["bandeira"][cor] != 0:
-                                        cores_bandeira.append(cor)
-                                cor_sorteada = choice(cores_bandeira)
-                                cor_repetida = cor_sorteada in cores_ja_informadas
-                                while cor_repetida == True:
+                                
+                                cor_invalida = True
+                                while cor_invalida:
                                     cor_sorteada = choice(cores_bandeira)
+                                    if cor_sorteada not in cores_ja_informadas:
+                                        break
+                                    
                                 cores_ja_informadas.append(cor_sorteada)
                                 dica_bandeira = "\nA bandeira do país sorteado possui a cor {}\n".format(cor_sorteada)
                                 dicas_solicitadas.append(dica_bandeira)
