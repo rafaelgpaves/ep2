@@ -213,8 +213,8 @@ while jogo:
                     print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
 
                 # imprimindo as dicas
-                print("\nDicas:\n")
-                imprime_dicas(cores_ja_informadas)
+                print("\nDicas: ")
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
