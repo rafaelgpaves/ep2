@@ -28,7 +28,7 @@ while jogo:
     cores_ja_informadas = [] # cores já informadas ao jogador pelo tipo de dica 1
     dicas_solicitadas = [] # dicas (gerais) já informadas ao jogador pelo sistema
 
-    #criando uma lista com as cores da bandeira do pais sorteado:
+    # criando uma lista com as cores da bandeira do país sorteado
     cores_bandeira = []
     for cor in paises[pais_sorteado]["bandeira"]:
         if paises[pais_sorteado]["bandeira"][cor] != 0:
@@ -89,8 +89,8 @@ while jogo:
             if entrada in paises and esta_na_lista(entrada, paises_e_distancias) == False:
 
                 tentativas -= 1
-                lat2 = paises[entrada]["geo"]["latitude"] #latitude do pais que o usuario digitou
-                long2 = paises[entrada]["geo"]["longitude"] #longitude do pais que o usuario digitou
+                lat2 = paises[entrada]["geo"]["latitude"] # latitude do país que o usuário digitou
+                long2 = paises[entrada]["geo"]["longitude"] # longitude do país que o usuário digitou
                 d = haversine(raio_terra, lat1, long1, lat2, long2)
 
                 if d == 0:
@@ -114,11 +114,12 @@ while jogo:
                         cor = "blue"
                     print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
 
-                #imprimindo as dicas:
+                # imprimindo as dicas
                 print("\nDicas: ")
                 if len(cores_ja_informadas) != 0:
                     print(" - Cores da bandeira: " + ", ".join(cores_ja_informadas))
-                    #sera que eh mais facil fazer uma funcao para imprimir dicas?
+                    # será que é mais facil fazer uma função para imprimir dicas?
+                    # eu pensei em colocar em uma lista e pedir pra ele imprimir cada item da lista, mas pode ficar bagunçado
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
