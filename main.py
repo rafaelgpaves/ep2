@@ -26,6 +26,10 @@ while jogo:
     long1 = paises[pais_sorteado]["geo"]["longitude"] # longitude do país sorteado
     paises_e_distancias = [] # lista que guarda os países já tentados pelo jogador
     cores_ja_informadas = [] # cores já informadas ao jogador pelo tipo de dica 1
+    letras_ja_informadas = [] # letras já informadas ao jogador pelo tipo de dica 2
+    letras_capital = 0 # total de letras na capital
+    for letra in paises[pais_sorteado]["capital"]:
+        letras_capital += 1
     dicas_solicitadas = [] # dicas (gerais) já informadas ao jogador pelo sistema
 
     # criando uma lista com as cores da bandeira do país sorteado
@@ -67,7 +71,7 @@ while jogo:
                     print("\nDesculpe, mas esse input é inválido\n")
                     continue
                 else:
-                    if dica_escolhida == "1":
+                    if dica_escolhida == "1": # cor da bandeira
                         if tentativas <= 4:
                             print("Desculpa, mas você nâo tem tentativas suficientes\n")
                             break
@@ -89,8 +93,25 @@ while jogo:
                                 dicas_solicitadas.append(dica_bandeira)
                                 print(dica_bandeira)
                                 break
-
-
+                    if dica_escolhida == "2": # letra da capital
+                        if tentativas <= 3:
+                            print("Desculpa, mas você nâo tem tentativas suficientes\n")
+                            break
+                        else:
+                            if len(letras_ja_informadas) >= letras_capital:
+                                print("Você já recebeu todas as letras da capital!")
+                                break
+                            else:
+                                tentativas -= 3
+                                letra = sorteia_letra(paises[pais_sorteado]["capital"], letras_ja_informadas)
+                                letras_ja_informadas.append(letra)
+                                print("A capital do país contém a letra '{0}'!").format(letra)
+                    if dica_escolhida == "3": # área
+                        if tentativas <= 6:
+                            print("Desculpa, mas você nâo tem tentativas suficientes\n")
+                            break
+                        else:
+                            area = paises[pais_sorteado]["area"]
         else:
 
             if entrada in paises and esta_na_lista(entrada, paises_e_distancias) == False:
@@ -106,7 +127,7 @@ while jogo:
 
                 adiciona_em_ordem(entrada, d, paises_e_distancias)
 
-                print("Distâncias: ")
+                print("\nDistâncias: ")
                 for pais in paises_e_distancias:
 
                     if pais[1] <= 1000:
