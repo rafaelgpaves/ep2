@@ -36,7 +36,14 @@ while jogo:
 
     rodada = True
     while rodada:
-        print("Você tem {} tentativas".format(tentativas))
+
+        if tentativas > 10:
+            codigo_da_cor = 34
+        elif tentativas > 5:
+            codigo_da_cor = 33
+        else:
+            codigo_da_cor = 31
+        print("Você tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
         if tentativas == 0:
 
