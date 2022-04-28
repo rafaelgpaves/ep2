@@ -98,7 +98,7 @@ def sorteia_pais(paises):
 
 ###
 
-def dicas(tentativas):
+def tabela_dicas(tentativas):
     banco_de_dicas = {1: ["Cor da Bandeira", 4], 2: ["Letra da capital", 3], 3: ["Área", 6], 4: ["População", 5], 5: ["Continente", 7], 0: ["Sem dica", 0]}
     x = PrettyTable()
     x.field_names = ["Índice", "Tipo", "Custo"]
@@ -106,3 +106,8 @@ def dicas(tentativas):
         if banco_de_dicas[tipo_de_dica][1] < tentativas:
             x.add_row([tipo_de_dica, banco_de_dicas[tipo_de_dica][0], str(banco_de_dicas[tipo_de_dica][1]) + " tentativas"])
     print(x)
+
+def imprime_dicas(cores_ja_informadas):
+
+    if len(cores_ja_informadas) != 0:
+        print(" - Cores da bandeira: " + ", ".join(cores_ja_informadas))

@@ -60,7 +60,7 @@ while jogo:
             rodada = False
 
         elif entrada == "dica":
-            dicas(tentativas)
+            tabela_dicas(tentativas)
             while True:
                 dica_escolhida = input("\nEscolha uma dica! [1/2/3/4/5/0]\n>>> ")
                 if dica_escolhida not in ("1", "2", "3", "4", "5", "0"):
@@ -123,10 +123,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                if len(cores_ja_informadas) != 0:
-                    print(" - Cores da bandeira: " + ", ".join(cores_ja_informadas))
-                    # será que é mais facil fazer uma função para imprimir dicas?
-                    # eu pensei em colocar em uma lista e pedir pra ele imprimir cada item da lista, mas pode ficar bagunçado
+                imprime_dicas(cores_ja_informadas)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
