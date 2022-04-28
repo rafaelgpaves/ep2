@@ -98,13 +98,14 @@ def sorteia_pais(paises):
 
 ###
 
-def tabela_dicas(tentativas):
+def tabela_dicas(tentativas, dict_true):
     banco_de_dicas = {1: ["Cor da Bandeira", 4], 2: ["Letra da capital", 3], 3: ["Área", 6], 4: ["População", 5], 5: ["Continente", 7], 0: ["Sem dica", 0]}
     x = PrettyTable()
     x.field_names = ["Índice", "Tipo", "Custo"]
     for tipo_de_dica in banco_de_dicas:
-        if banco_de_dicas[tipo_de_dica][1] < tentativas:
+        if banco_de_dicas[tipo_de_dica][1] < tentativas and dict_true[banco_de_dicas[tipo_de_dica][0]] == True:
             x.add_row([tipo_de_dica, banco_de_dicas[tipo_de_dica][0], str(banco_de_dicas[tipo_de_dica][1]) + " tentativas"])
+    print("\nMERCADO DE DICAS\n")
     print(x)
 
 def imprime_dicas(cores_ja_informadas):
