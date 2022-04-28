@@ -1,7 +1,6 @@
 """importando funcoes e os dados dos paises:"""
 from funcoes import *
 import json
-from termcolor import colored
 
 with open("dados.json", "r") as arquivo:
     dados = arquivo.read()
