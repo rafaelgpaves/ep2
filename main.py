@@ -47,7 +47,7 @@ while jogo:
             codigo_da_cor = 33
         else:
             codigo_da_cor = 31
-        print("Você tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
+        print("\nVocê tem {} tentativas\n".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
         if tentativas == 0:
 
@@ -207,7 +207,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
