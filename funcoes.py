@@ -1,6 +1,7 @@
 from math import *
 from random import *
 from prettytable import PrettyTable
+from termcolor import colored
 
 def adiciona_em_ordem(nome_pais, d, paises):
 
@@ -105,7 +106,7 @@ def tabela_dicas(tentativas, dict_true):
     for tipo_de_dica in banco_de_dicas:
         if banco_de_dicas[tipo_de_dica][1] < tentativas and dict_true[banco_de_dicas[tipo_de_dica][0]] == True:
             x.add_row([tipo_de_dica, banco_de_dicas[tipo_de_dica][0], str(banco_de_dicas[tipo_de_dica][1]) + " tentativas"])
-    print("\nMERCADO DE DICAS\n")
+    print(colored("\nMERCADO DE DICAS", "white", attrs=["bold"]))
     print(x)
 
 def imprime_dicas(cores_ja_informadas):
