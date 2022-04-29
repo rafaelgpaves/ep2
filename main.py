@@ -41,6 +41,13 @@ while jogo:
     rodada = True
     while rodada:
 
+        if tentativas <= 0:
+
+            print("Acabaram as tentativas, que pena!")
+            print("O país era {}".format(pais_sorteado.title()))
+            rodada = False
+            continue
+        
         if tentativas > 10:
             codigo_da_cor = 34
         elif tentativas > 5:
@@ -49,13 +56,6 @@ while jogo:
             codigo_da_cor = 31
         print("\nVocê tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
-        if tentativas == 0:
-
-            print("Acabaram as tentativas, que pena!")
-            print("O país era {}".format(pais_sorteado))
-            rodada = False
-            continue
-
         entrada = input("Qual o seu palpite? (comandos: 'dica' ou 'desisto')\n>>> ").lower()
         if entrada == "desisto":
 
@@ -63,7 +63,7 @@ while jogo:
 
             rodada = False
 
-        elif entrada == "dica":
+        elif entrada == "dica" or entrada == "dicas":
             if tentativas <= 7:
                 status_dicas["Continente"] = False
             elif tentativas <= 6:
@@ -96,8 +96,10 @@ while jogo:
                         if status_dicas["Cor da Bandeira"] == False:
                             if tentativas > 4:
                                 print("Desculpa, mas todas as cores já foram informadas.\n")
+                                break
                             else:
                                 print("Desculpa, mas você não tem tentativas suficientes.\n")
+                                break
                         else:
                             tentativas -= 4
                             cor_invalida = True
@@ -116,9 +118,11 @@ while jogo:
                     if dica_escolhida == "2": # letra da capital
                         if status_dicas["Letra da capital"] == False:
                             if tentativas > 3:
-                                print("Desculpa, mas você já recebeu todas as letras da capital!.")
+                                print("Desculpa, mas você já recebeu todas as letras da capital.")
+                                break
                             else:
                                 print("Desculpa, mas você não tem tentativas suficientes.")
+                                break
                         else:
                             tentativas -= 3
                             letra = sorteia_letra(paises[pais_sorteado]["capital"], letras_ja_informadas)
@@ -132,8 +136,10 @@ while jogo:
                         if status_dicas["Área"] == False:
                             if tentativas > 6:
                                 print("\nDesculpa, mas você já perguntou a área do país!")
+                                break
                             else:
                                 print("\nDesculpa, mas você não tem tentativas suficientes.")
+                                break
                         else:
                             tentativas -= 6
                             area = paises[pais_sorteado]["area"]
@@ -145,8 +151,10 @@ while jogo:
                         if status_dicas["População"] == False:
                             if tentativas > 5:
                                 print("\nDesculpa, mas você já perguntou a população do país!")
+                                break
                             else:
                                 print("\nDesculpa, mas você não tem tentativas suficientes.")
+                                break
                         else:
                             tentativas -= 5
                             populacao = paises[pais_sorteado]["populacao"]
@@ -158,8 +166,10 @@ while jogo:
                         if status_dicas["Continente"] == False:
                             if tentativas > 7:
                                 print("\nDesculpa, mas você já perguntou em que continente o país se encontra!")
+                                break
                             else:
                                 print("\nDesculpa, mas você não tem tentativas suficientes.")
+                                break
                         else:
                             tentativas -= 7
                             continente = paises[pais_sorteado]["continente"]
@@ -214,7 +224,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
