@@ -43,7 +43,7 @@ while jogo:
 
         if tentativas <= 0:
 
-            print("Acabaram as tentativas, que pena!")
+            print("\nAcabaram as tentativas, que pena!")
             print("O país era {}".format(pais_sorteado.title()))
             rodada = False
             continue
@@ -110,7 +110,7 @@ while jogo:
                                 dicas_solicitadas.append(dica_bandeira)
                                 print(dica_bandeira)
                         else:
-                            print("Desculpa, mas você não tem tentativas suficientes.\n")
+                            print("\nDesculpa, mas você não tem tentativas suficientes.\n")
                         break
 
                     if dica_escolhida == "2": # letra da capital
@@ -125,7 +125,7 @@ while jogo:
                                 if len(letras_ja_informadas) >= letras_capital:
                                     status_dicas["Letra da capital"] = False
                         else:
-                            print("Desculpa, mas você não tem tentativas suficientes.")
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
                         break
 
                     if dica_escolhida == "3": # área
@@ -162,18 +162,18 @@ while jogo:
                                 tentativas -= 7
                                 continente = paises[pais_sorteado]["continente"]
                                 if continente == "africa":
-                                    continente = "África"
-                                if continente == "oceania":
-                                    continente = "Oceania"
-                                if continente == "europa":
-                                    continente = "Europa"
-                                if continente == "asia":
-                                    continente = "Ásia"
-                                if continente == "america do norte":
-                                    continente = "América do Norte"
-                                if continente == "america do sul":
-                                    continente = "América do Sul"
-                                print("\nO país sorteado se encontra na {0}.".format(continente))
+                                    continente_certo = "África"
+                                elif continente == "oceania":
+                                    continente_certo = "Oceania"
+                                elif continente == "europa":
+                                    continente_certo = "Europa"
+                                elif continente == "asia":
+                                    continente_certo = "Ásia"
+                                elif continente == "america do norte":
+                                    continente_certo = "América do Norte"
+                                elif continente == "america do sul":
+                                    continente_certo = "América do Sul"
+                                print("\nO país sorteado se encontra na {0}.".format(continente_certo))
                                 status_dicas["Continente"] = False
                         else:
                             print("\nDesculpa, mas você não tem tentativas suficientes.")
@@ -192,7 +192,7 @@ while jogo:
                 d = haversine(raio_terra, lat1, long1, lat2, long2)
 
                 if d == 0:
-                    print("Você acertou, parabéns!")
+                    print("\nVocê acertou, parabéns!")
                     rodada = False
 
                 adiciona_em_ordem(entrada, d, paises_e_distancias)
@@ -214,7 +214,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
@@ -226,7 +226,7 @@ while jogo:
 
     entrada_valida = True
     while entrada_valida:
-        de_novo = input("Quer jogar de novo? [s/n]\n>>> ").lower() 
+        de_novo = input("\nQuer jogar de novo? [s/n]\n>>> ").lower() 
         if de_novo.lower() == "s":
             entrada_valida = False
         elif de_novo.lower() == "n":
