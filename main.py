@@ -125,7 +125,7 @@ while jogo:
                                 dicas_solicitadas.append(dica_bandeira)
                                 print(dica_bandeira)
                         else:
-                            print("\nDesculpa, mas você não tem tentativas suficientes.\n")
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
                         break
 
                     if dica_escolhida == "2": # letra da capital
