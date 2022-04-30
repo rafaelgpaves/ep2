@@ -38,6 +38,21 @@ while jogo:
         if paises[pais_sorteado]["bandeira"][cor] != 0:
             cores_bandeira.append(cor)
 
+    # formatando a grafia do continente
+    continente = paises[pais_sorteado]["continente"]
+    if continente == "africa":
+        continente_certo = "África"
+    elif continente == "oceania":
+        continente_certo = "Oceania"
+    elif continente == "europa":
+        continente_certo = "Europa"
+    elif continente == "asia":
+        continente_certo = "Ásia"
+    elif continente == "america do norte":
+        continente_certo = "América do Norte"
+    elif continente == "america do sul":
+        continente_certo = "América do Sul"
+
     rodada = True
     while rodada:
 
@@ -59,7 +74,7 @@ while jogo:
         entrada = input("Qual o seu palpite? (comandos: 'dica' ou 'desisto')\n>>> ").lower()
         if entrada == "desisto":
 
-            print("O país era {}".format(pais_sorteado))
+            print("O país era {}".format(pais_sorteado.title()))
 
             rodada = False
 
@@ -160,19 +175,6 @@ while jogo:
                                 print("\nDesculpa, mas você já perguntou em que continente o país se encontra!")
                             else:
                                 tentativas -= 7
-                                continente = paises[pais_sorteado]["continente"]
-                                if continente == "africa":
-                                    continente_certo = "África"
-                                elif continente == "oceania":
-                                    continente_certo = "Oceania"
-                                elif continente == "europa":
-                                    continente_certo = "Europa"
-                                elif continente == "asia":
-                                    continente_certo = "Ásia"
-                                elif continente == "america do norte":
-                                    continente_certo = "América do Norte"
-                                elif continente == "america do sul":
-                                    continente_certo = "América do Sul"
                                 print("\nO país sorteado se encontra na {0}.".format(continente_certo))
                                 status_dicas["Continente"] = False
                         else:
