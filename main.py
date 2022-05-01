@@ -71,7 +71,7 @@ while jogo:
             codigo_da_cor = 31
         print("\nVocê tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
-        entrada = input("Qual o seu palpite? (comandos: 'dica' ou 'desisto')\n>>> ").lower()
+        entrada = input("Qual o seu palpite? (comandos: 'dica', 'desisto' ou 'inventario')\n>>> ").lower()
         if entrada == "desisto":
 
             print("O país era {}".format(pais_sorteado.title()))
@@ -184,6 +184,26 @@ while jogo:
                     if dica_escolhida == "0": # sem dica
                         print("\nOk, você não quer nenhuma dica!")
                         break
+        
+        elif entrada == "inventario":
+
+            print("\nDistâncias: ")
+            for pais in paises_e_distancias:
+                if pais[1] <= 1000:
+                    cor = "green"
+                elif pais[1] < 2500:
+                    cor = "yellow"
+                elif pais[1] <= 5000:
+                    cor = "red"
+                elif pais[1] <= 10000:
+                    cor = "magenta"
+                else:
+                    cor = "blue"
+                print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
+
+            print("\nDicas: ")
+            imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo)
+        
         else:
 
             if entrada in paises and esta_na_lista(entrada, paises_e_distancias) == False:
