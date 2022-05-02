@@ -109,10 +109,13 @@ def tabela_dicas(tentativas, dict_true):
     print(colored("\nMERCADO DE DICAS", "white", attrs=["bold"]))
     print(x)
 
-def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado):
+def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, dict_porcentagens):
 
     if len(cores_ja_informadas) != 0:
-        print(" - Cores da bandeira: " + ", ".join(cores_ja_informadas))
+        texto = []
+        for cor in cores_ja_informadas:
+            texto.append(cor + " ({}%)".format(dict_porcentagens[cor]))
+        print(" - Cores da bandeira: " + ", ".join(texto))
 
     if len(letras_ja_informadas) != 0:
         print(" - Letras da capital: " + ", ".join(letras_ja_informadas))
