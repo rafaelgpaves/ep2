@@ -53,6 +53,12 @@ while jogo:
     elif continente == "america do sul":
         continente_certo = "América do Sul"
 
+    #printando os comandos:
+    print("Comandos: ")
+    print("    dica/dicas -- entra no mercado de dicas")
+    print("    desisto    -- desiste da rodada")
+    print("    inventario -- exibe suas dicas e distancias")
+
     rodada = True
     while rodada:
 
