@@ -81,23 +81,13 @@ while jogo:
         elif entrada == "dica" or entrada == "dicas":
             if tentativas <= 7:
                 status_dicas["Continente"] = False
-            elif tentativas <= 6:
-                status_dicas["Continente"] = False
+            if tentativas <= 6:
                 status_dicas["Área"] = False
-            elif tentativas <= 5:
-                status_dicas["Continente"] = False
-                status_dicas["Área"] = False
+            if tentativas <= 5:
                 status_dicas["População"] = False
-            elif tentativas <= 4:
-                status_dicas["Continente"] = False
-                status_dicas["Área"] = False
-                status_dicas["População"] = False
+            if tentativas <= 4:
                 status_dicas["Cor da Bandeira"] = False
-            elif tentativas <= 3:
-                status_dicas["Continente"] = False
-                status_dicas["Área"] = False
-                status_dicas["População"] = False
-                status_dicas["Cor da Bandeira"] = False
+            if tentativas <= 3:
                 status_dicas["Letra da capital"] = False
 
             tabela_dicas(tentativas, status_dicas)
