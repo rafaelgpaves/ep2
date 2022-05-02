@@ -214,7 +214,7 @@ while jogo:
                 print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
 
             print("\nDicas: ")
-            imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo)
+            imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, porcentagens)
         
         else:
 
