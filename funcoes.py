@@ -109,8 +109,8 @@ def tabela_dicas(tentativas, dict_true):
     print(colored("\nMERCADO DE DICAS", "white", attrs=["bold"]))
     print(x)
 
-def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, dict_porcentagens):
-
+def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, dict_porcentagens):
+    
     if len(cores_ja_informadas) != 0:
         texto = []
         for cor in cores_ja_informadas:
@@ -127,4 +127,4 @@ def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paise
         print(" - População: {} habitantes".format(paises[pais_sorteado]["populacao"]))
 
     if status_dicas["Continente"] == False:
-        print(" - Continente: " + paises[pais_sorteado]["continente"])
+        print(" - Continente: " + continente_certo)

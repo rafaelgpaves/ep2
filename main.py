@@ -43,9 +43,37 @@ while jogo:
     if "outras" in cores_bandeira:
         cores_bandeira.remove("outras")
 
+    # formatando a grafia do continente
+    continente = paises[pais_sorteado]["continente"]
+    if continente == "africa":
+        continente_certo = "África"
+    elif continente == "oceania":
+        continente_certo = "Oceania"
+    elif continente == "europa":
+        continente_certo = "Europa"
+    elif continente == "asia":
+        continente_certo = "Ásia"
+    elif continente == "america do norte":
+        continente_certo = "América do Norte"
+    elif continente == "america do sul":
+        continente_certo = "América do Sul"
+
+    # printando os comandos:
+    print("Comandos: ")
+    print("    dica/dicas -- entra no mercado de dicas")
+    print("    desisto    -- desiste da rodada")
+    print("    inventario -- exibe suas dicas e distancias")
+
     rodada = True
     while rodada:
 
+        if tentativas <= 0:
+
+            print("\nAcabaram as tentativas, que pena!")
+            print("O país era {}".format(pais_sorteado.title()))
+            rodada = False
+            continue
+        
         if tentativas > 10:
             codigo_da_cor = 34
         elif tentativas > 5:
@@ -54,40 +82,23 @@ while jogo:
             codigo_da_cor = 31
         print("\nVocê tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
-        if tentativas == 0:
-
-            print("Acabaram as tentativas, que pena!")
-            print("O país era {}".format(pais_sorteado))
-            rodada = False
-            continue
-
-        entrada = input("Qual o seu palpite? (comandos: 'dica' ou 'desisto')\n>>> ").lower()
+        entrada = input("Qual o seu palpite? (comandos: 'dica', 'desisto' ou 'inventario')\n>>> ").lower()
         if entrada == "desisto":
 
-            print("O país era {}".format(pais_sorteado))
+            print("O país era {}".format(pais_sorteado.title()))
 
             rodada = False
 
-        elif entrada == "dica":
+        elif entrada == "dica" or entrada == "dicas":
             if tentativas <= 7:
                 status_dicas["Continente"] = False
-            elif tentativas <= 6:
-                status_dicas["Continente"] = False
+            if tentativas <= 6:
                 status_dicas["Área"] = False
-            elif tentativas <= 5:
-                status_dicas["Continente"] = False
-                status_dicas["Área"] = False
+            if tentativas <= 5:
                 status_dicas["População"] = False
-            elif tentativas <= 4:
-                status_dicas["Continente"] = False
-                status_dicas["Área"] = False
-                status_dicas["População"] = False
+            if tentativas <= 4:
                 status_dicas["Cor da Bandeira"] = False
-            elif tentativas <= 3:
-                status_dicas["Continente"] = False
-                status_dicas["Área"] = False
-                status_dicas["População"] = False
-                status_dicas["Cor da Bandeira"] = False
+            if tentativas <= 3:
                 status_dicas["Letra da capital"] = False
 
             tabela_dicas(tentativas, status_dicas)
@@ -98,96 +109,102 @@ while jogo:
                     continue
                 else:
                     if dica_escolhida == "1": # cor da bandeira
-                        if status_dicas["Cor da Bandeira"] == False:
-                            if tentativas > 4:
+                        if tentativas > 4:
+                            if status_dicas["Cor da Bandeira"] == False:
                                 print("Desculpa, mas todas as cores já foram informadas.\n")
                             else:
-                                print("Desculpa, mas você não tem tentativas suficientes.\n")
+                                tentativas -= 4
+                                cor_invalida = True
+                                while cor_invalida:
+                                    cor_sorteada = choice(cores_bandeira)
+                                    if cor_sorteada not in cores_ja_informadas:
+                                        break
+                                cores_ja_informadas.append(cor_sorteada)
+                                if len(cores_bandeira) == len(cores_ja_informadas):
+                                    status_dicas["Cor da Bandeira"] = False
+                                dica_bandeira = "\n{0}% da bandeira do país é composta pela cor {1}".format(porcentagens[cor_sorteada], cor_sorteada)
+                                dicas_solicitadas.append(dica_bandeira)
+                                print(dica_bandeira)
                         else:
-                            tentativas -= 4
-                            cor_invalida = True
-                            while cor_invalida:
-                                cor_sorteada = choice(cores_bandeira)
-                                if cor_sorteada not in cores_ja_informadas:
-                                    break
-                            cores_ja_informadas.append(cor_sorteada)
-                            porcentagens[cor_sorteada] = paises[pais_sorteado]["bandeira"][cor_sorteada]
-                            if len(cores_bandeira) == len(cores_ja_informadas):
-                                status_dicas["Cor da Bandeira"] = False
-                            dica_bandeira = "\n{0}% da bandeira do país é composta pela cor {1}".format(porcentagens[cor_sorteada], cor_sorteada)
-                            dicas_solicitadas.append(dica_bandeira)
-                            print(dica_bandeira)
-                            break
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
+                        break
 
                     if dica_escolhida == "2": # letra da capital
-                        if status_dicas["Letra da capital"] == False:
-                            if tentativas > 3:
-                                print("Desculpa, mas você já recebeu todas as letras da capital!.")
+                        if tentativas > 3:
+                            if status_dicas["Letra da capital"] == False:
+                                print("Desculpa, mas você já recebeu todas as letras da capital.")
                             else:
-                                print("Desculpa, mas você não tem tentativas suficientes.")
+                                tentativas -= 3
+                                letra = sorteia_letra(paises[pais_sorteado]["capital"], letras_ja_informadas)
+                                letras_ja_informadas.append(letra)
+                                print("\nA capital do país contém a letra '{}'.".format(letra))
+                                if len(letras_ja_informadas) >= letras_capital:
+                                    status_dicas["Letra da capital"] = False
                         else:
-                            tentativas -= 3
-                            letra = sorteia_letra(paises[pais_sorteado]["capital"], letras_ja_informadas)
-                            letras_ja_informadas.append(letra)
-                            print("\nA capital do país contém a letra '{}'.".format(letra))
-                            if len(letras_ja_informadas) >= letras_capital:
-                                status_dicas["Letra da capital"] = False
-                            break
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
+                        break
 
                     if dica_escolhida == "3": # área
-                        if status_dicas["Área"] == False:
-                            if tentativas > 6:
+                        if tentativas > 6:
+                            if status_dicas["Área"] == False:
                                 print("\nDesculpa, mas você já perguntou a área do país!")
                             else:
-                                print("\nDesculpa, mas você não tem tentativas suficientes.")
+                                tentativas -= 6
+                                area = paises[pais_sorteado]["area"]
+                                print("\nA área do país sorteado é de {0} km2.".format(area))
+                                status_dicas["Área"] = False
                         else:
-                            tentativas -= 6
-                            area = paises[pais_sorteado]["area"]
-                            print("\nA área do país sorteado é de {0} km2.".format(area))
-                            status_dicas["Área"] = False
-                            break
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
+                        break
 
                     if dica_escolhida == "4": # população
-                        if status_dicas["População"] == False:
-                            if tentativas > 5:
+                        if tentativas > 5:
+                            if status_dicas["População"] == False:
                                 print("\nDesculpa, mas você já perguntou a população do país!")
                             else:
-                                print("\nDesculpa, mas você não tem tentativas suficientes.")
+                                tentativas -= 5
+                                populacao = paises[pais_sorteado]["populacao"]
+                                print("\nA população do país sorteado é de {0} habitantes.".format(populacao))
+                                status_dicas["População"] = False
                         else:
-                            tentativas -= 5
-                            populacao = paises[pais_sorteado]["populacao"]
-                            print("\nA população do país sorteado é de {0} habitantes.".format(populacao))
-                            status_dicas["População"] = False
-                            break
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
+                        break
 
                     if dica_escolhida == "5": # continente
-                        if status_dicas["Continente"] == False:
-                            if tentativas > 7:
+                        if tentativas > 7:
+                            if status_dicas["Continente"] == False:
                                 print("\nDesculpa, mas você já perguntou em que continente o país se encontra!")
                             else:
-                                print("\nDesculpa, mas você não tem tentativas suficientes.")
+                                tentativas -= 7
+                                print("\nO país sorteado se encontra na {0}.".format(continente_certo))
+                                status_dicas["Continente"] = False
                         else:
-                            tentativas -= 7
-                            continente = paises[pais_sorteado]["continente"]
-                            if continente == "africa":
-                                continente = "África"
-                            if continente == "oceania":
-                                continente = "Oceania"
-                            if continente == "europa":
-                                continente = "Europa"
-                            if continente == "asia":
-                                continente = "Ásia"
-                            if continente == "america do norte":
-                                continente = "América do Norte"
-                            if continente == "america do sul":
-                                continente = "América do Sul"
-                            print("\nO país sorteado se encontra na {0}.".format(continente))
-                            status_dicas["Continente"] = False
-                            break
+                            print("\nDesculpa, mas você não tem tentativas suficientes.")
+                        break
                     
                     if dica_escolhida == "0": # sem dica
                         print("\nOk, você não quer nenhuma dica!")
                         break
+        
+        elif entrada == "inventario":
+
+            print("\nDistâncias: ")
+            for pais in paises_e_distancias:
+                if pais[1] <= 1000:
+                    cor = "green"
+                elif pais[1] < 2500:
+                    cor = "yellow"
+                elif pais[1] <= 5000:
+                    cor = "red"
+                elif pais[1] <= 10000:
+                    cor = "magenta"
+                else:
+                    cor = "blue"
+                print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
+
+            print("\nDicas: ")
+            imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo)
+        
         else:
 
             if entrada in paises and esta_na_lista(entrada, paises_e_distancias) == False:
@@ -198,7 +215,7 @@ while jogo:
                 d = haversine(raio_terra, lat1, long1, lat2, long2)
 
                 if d == 0:
-                    print("Você acertou, parabéns!")
+                    print("\nVocê acertou, parabéns!")
                     rodada = False
 
                 adiciona_em_ordem(entrada, d, paises_e_distancias)
@@ -220,7 +237,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, porcentagens)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, porcentagens)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
@@ -232,10 +249,10 @@ while jogo:
 
     entrada_valida = True
     while entrada_valida:
-        de_novo = input("Quer jogar de novo? [s|n]\n>>> ").lower() 
-        if de_novo.lower() == "s":
+        de_novo = input("\nQuer jogar de novo? [s|n]\n>>> ").lower() 
+        if de_novo == "s":
             entrada_valida = False
-        elif de_novo.lower() == "n":
+        elif de_novo == "n":
             print("\nObrigado por jogar!\n")
             entrada_valida = False
             jogo = False
