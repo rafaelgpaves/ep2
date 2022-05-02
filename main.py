@@ -195,7 +195,18 @@ while jogo:
                     cor = "magenta"
                 else:
                     cor = "blue"
-                print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
+
+                distancia_str = str(round(pais[1])) #string que guarda a distancia do pais atual
+                distancia_com_ponto = "" #string que guarda a distancia do pais atual usando pontos a cada tres numeros
+                contador = 0 #variavel que conta o numero de caracteres (quando eh igual a 3, eh adicionado um ponto)
+                for numero in range(len(distancia_str) -1, -1, -1):
+                    if contador == 3:
+                        distancia_com_ponto = "." + distancia_com_ponto
+                        contador = 0
+                    distancia_com_ponto = distancia_str[numero] + distancia_com_ponto
+                    contador += 1
+                
+                print(colored("{} km --> {}".format(distancia_com_ponto, pais[0]), cor, attrs=["bold"]))
 
             print("\nDicas: ")
             imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo)
@@ -228,7 +239,18 @@ while jogo:
                         cor = "magenta"
                     else:
                         cor = "blue"
-                    print(colored("{} km --> {}".format(int(pais[1]), pais[0]), cor, attrs=["bold"]))
+
+                    distancia_str = str(round(pais[1])) #string que guarda a distancia do pais atual
+                    distancia_com_ponto = "" #string que guarda a distancia do pais atual usando pontos a cada tres numeros
+                    contador = 0 #variavel que conta o numero de caracteres (quando eh igual a 3, eh adicionado um ponto)
+                    for numero in range(len(distancia_str) -1, -1, -1):
+                        if contador == 3:
+                            distancia_com_ponto = "." + distancia_com_ponto
+                            contador = 0
+                        distancia_com_ponto = distancia_str[numero] + distancia_com_ponto
+                        contador += 1
+
+                    print(colored("{} km --> {}".format(distancia_com_ponto, pais[0]), cor, attrs=["bold"]))
 
                 # imprimindo as dicas
                 print("\nDicas: ")
