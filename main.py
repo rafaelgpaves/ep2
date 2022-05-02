@@ -12,6 +12,22 @@ paises = normaliza(continentes)
 
 raio_terra = 6371
 
+# printando o "título"
+print("\n")
+print(" " + ("=" * 18) + " ")
+print("|" + (" " * 18) + "|")
+print("|" + (" " * 1) + colored("Aᴅɪᴠɪɴʜᴇ ᴏ ᴘᴀís!", "cyan", attrs=["bold"]) + (" " * 1) +"|")
+print("|" + (" " * 18) + "|")
+print(" " + ("=" * 18) + " ")
+print("ᴘᴏʀ Bʀᴜɴᴏ Zᴀʟᴄʙᴇʀɢ ᴇ Rᴀғᴀᴇʟ Gᴏʀᴅᴏɴ Pᴀᴠᴇs")
+
+# printando os comandos:
+print("\n")
+print("Comandos: ")
+print("    dica/dicas -- entra no mercado de dicas")
+print("    desisto    -- desiste da rodada")
+print("    inventario -- exibe suas dicas e distâncias")
+
 print("\nUm país foi escolhido, tente adivinhá-lo!")
 
 """o jogo:"""
@@ -58,12 +74,6 @@ while jogo:
     elif continente == "america do sul":
         continente_certo = "América do Sul"
 
-    # printando os comandos:
-    print("Comandos: ")
-    print("    dica/dicas -- entra no mercado de dicas")
-    print("    desisto    -- desiste da rodada")
-    print("    inventario -- exibe suas dicas e distancias")
-
     rodada = True
     while rodada:
 
@@ -82,7 +92,7 @@ while jogo:
             codigo_da_cor = 31
         print("\nVocê tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
-        entrada = input("Qual o seu palpite? (comandos: 'dica', 'desisto' ou 'inventario')\n>>> ").lower()
+        entrada = input("Qual o seu palpite?\n>>> ").lower()
         if entrada == "desisto":
 
             print("O país era {}".format(pais_sorteado.title()))
@@ -122,6 +132,7 @@ while jogo:
                                 cores_ja_informadas.append(cor_sorteada)
                                 if len(cores_bandeira) == len(cores_ja_informadas):
                                     status_dicas["Cor da Bandeira"] = False
+                                porcentagens[cor_sorteada] = paises[pais_sorteado]["bandeira"][cor_sorteada]
                                 dica_bandeira = "\n{0}% da bandeira do país é composta pela cor {1}".format(porcentagens[cor_sorteada], cor_sorteada)
                                 dicas_solicitadas.append(dica_bandeira)
                                 print(dica_bandeira)
