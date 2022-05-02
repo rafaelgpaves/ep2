@@ -239,9 +239,9 @@ while jogo:
     entrada_valida = True
     while entrada_valida:
         de_novo = input("\nQuer jogar de novo? [s/n]\n>>> ").lower() 
-        if de_novo.lower() == "s":
+        if de_novo == "s":
             entrada_valida = False
-        elif de_novo.lower() == "n":
+        elif de_novo == "n":
             print("\nObrigado por jogar!\n")
             entrada_valida = False
             jogo = False
