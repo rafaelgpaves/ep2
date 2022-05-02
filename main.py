@@ -26,6 +26,7 @@ while jogo:
     paises_e_distancias = [] # lista que guarda os países já tentados pelo jogador
     status_dicas = {"Cor da Bandeira": True, "Letra da capital": True, "Área": True, "População": True, "Continente": True, "Sem dica": True}
     cores_ja_informadas = [] # cores já informadas ao jogador pelo tipo de dica 1
+    porcentagens = {} # dict que usamos para informar a porcentagem das cores na bandeira
     letras_ja_informadas = [] # letras já informadas ao jogador pelo tipo de dica 2
     letras_capital = 0 # total de letras na capital
     for letra in paises[pais_sorteado]["capital"]:
@@ -37,6 +38,10 @@ while jogo:
     for cor in paises[pais_sorteado]["bandeira"]:
         if paises[pais_sorteado]["bandeira"][cor] != 0:
             cores_bandeira.append(cor)
+
+    # removendo a cor "outros"
+    if "outras" in cores_bandeira:
+        cores_bandeira.remove("outras")
 
     rodada = True
     while rodada:
@@ -87,7 +92,7 @@ while jogo:
 
             tabela_dicas(tentativas, status_dicas)
             while True:
-                dica_escolhida = input("\nEscolha uma dica! [1/2/3/4/5/0]\n>>> ")
+                dica_escolhida = input("\nEscolha uma dica! [1|2|3|4|5|0]\n>>> ")
                 if dica_escolhida not in ("1", "2", "3", "4", "5", "0"):
                     print("\nDesculpe, mas esse input é inválido\n")
                     continue
@@ -106,9 +111,10 @@ while jogo:
                                 if cor_sorteada not in cores_ja_informadas:
                                     break
                             cores_ja_informadas.append(cor_sorteada)
+                            porcentagens[cor_sorteada] = paises[pais_sorteado]["bandeira"][cor_sorteada]
                             if len(cores_bandeira) == len(cores_ja_informadas):
                                 status_dicas["Cor da Bandeira"] = False
-                            dica_bandeira = "\nA bandeira do país sorteado possui a cor {}".format(cor_sorteada)
+                            dica_bandeira = "\n{0}% da bandeira do país é composta pela cor {1}".format(porcentagens[cor_sorteada], cor_sorteada)
                             dicas_solicitadas.append(dica_bandeira)
                             print(dica_bandeira)
                             break
@@ -214,7 +220,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, porcentagens)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
@@ -226,7 +232,7 @@ while jogo:
 
     entrada_valida = True
     while entrada_valida:
-        de_novo = input("Quer jogar de novo? [s/n]\n>>> ").lower() 
+        de_novo = input("Quer jogar de novo? [s|n]\n>>> ").lower() 
         if de_novo.lower() == "s":
             entrada_valida = False
         elif de_novo.lower() == "n":
