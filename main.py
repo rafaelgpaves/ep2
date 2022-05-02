@@ -12,6 +12,22 @@ paises = normaliza(continentes)
 
 raio_terra = 6371
 
+# printando o "título"
+print("\n")
+print(" " + ("=" * 18) + " ")
+print("|" + (" " * 18) + "|")
+print("|" + (" " * 1) + colored("Aᴅɪᴠɪɴʜᴇ ᴏ ᴘᴀís!", "cyan", attrs=["bold"]) + (" " * 1) +"|")
+print("|" + (" " * 18) + "|")
+print(" " + ("=" * 18) + " ")
+print("ᴘᴏʀ Bʀᴜɴᴏ Zᴀʟᴄʙᴇʀɢ ᴇ Rᴀғᴀᴇʟ Gᴏʀᴅᴏɴ Pᴀᴠᴇs")
+
+# printando os comandos:
+print("\n")
+print("Comandos: ")
+print("    dica/dicas -- entra no mercado de dicas")
+print("    desisto    -- desiste da rodada")
+print("    inventario -- exibe suas dicas e distâncias")
+
 print("\nUm país foi escolhido, tente adivinhá-lo!")
 
 """o jogo:"""
@@ -26,6 +42,7 @@ while jogo:
     paises_e_distancias = [] # lista que guarda os países já tentados pelo jogador
     status_dicas = {"Cor da Bandeira": True, "Letra da capital": True, "Área": True, "População": True, "Continente": True, "Sem dica": True}
     cores_ja_informadas = [] # cores já informadas ao jogador pelo tipo de dica 1
+    porcentagens = {} # dict que usamos para informar a porcentagem das cores na bandeira
     letras_ja_informadas = [] # letras já informadas ao jogador pelo tipo de dica 2
     letras_capital = 0 # total de letras na capital
     for letra in paises[pais_sorteado]["capital"]:
@@ -37,6 +54,10 @@ while jogo:
     for cor in paises[pais_sorteado]["bandeira"]:
         if paises[pais_sorteado]["bandeira"][cor] != 0:
             cores_bandeira.append(cor)
+
+    # removendo a cor "outros"
+    if "outras" in cores_bandeira:
+        cores_bandeira.remove("outras")
 
     # formatando a grafia do continente
     continente = paises[pais_sorteado]["continente"]
@@ -52,12 +73,6 @@ while jogo:
         continente_certo = "América do Norte"
     elif continente == "america do sul":
         continente_certo = "América do Sul"
-
-    #printando os comandos:
-    print("Comandos: ")
-    print("    dica/dicas -- entra no mercado de dicas")
-    print("    desisto    -- desiste da rodada")
-    print("    inventario -- exibe suas dicas e distancias")
 
     rodada = True
     while rodada:
@@ -77,7 +92,7 @@ while jogo:
             codigo_da_cor = 31
         print("\nVocê tem {} tentativas".format('\033[1;{0};40m{1}\033[0;0m'.format(codigo_da_cor, tentativas)))
 
-        entrada = input("Qual o seu palpite? (comandos: 'dica', 'desisto' ou 'inventario')\n>>> ").lower()
+        entrada = input("Qual o seu palpite?\n>>> ").lower()
         if entrada == "desisto":
 
             print("O país era {}".format(pais_sorteado.title()))
@@ -98,7 +113,7 @@ while jogo:
 
             tabela_dicas(tentativas, status_dicas)
             while True:
-                dica_escolhida = input("\nEscolha uma dica! [1/2/3/4/5/0]\n>>> ")
+                dica_escolhida = input("\nEscolha uma dica! [1|2|3|4|5|0]\n>>> ")
                 if dica_escolhida not in ("1", "2", "3", "4", "5", "0"):
                     print("\nDesculpe, mas esse input é inválido\n")
                     continue
@@ -117,7 +132,8 @@ while jogo:
                                 cores_ja_informadas.append(cor_sorteada)
                                 if len(cores_bandeira) == len(cores_ja_informadas):
                                     status_dicas["Cor da Bandeira"] = False
-                                dica_bandeira = "\nA bandeira do país sorteado possui a cor {}".format(cor_sorteada)
+                                porcentagens[cor_sorteada] = paises[pais_sorteado]["bandeira"][cor_sorteada]
+                                dica_bandeira = "\n{0}% da bandeira do país é composta pela cor {1}".format(porcentagens[cor_sorteada], cor_sorteada)
                                 dicas_solicitadas.append(dica_bandeira)
                                 print(dica_bandeira)
                         else:
@@ -254,7 +270,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, porcentagens)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
@@ -266,7 +282,7 @@ while jogo:
 
     entrada_valida = True
     while entrada_valida:
-        de_novo = input("\nQuer jogar de novo? [s/n]\n>>> ").lower() 
+        de_novo = input("\nQuer jogar de novo? [s|n]\n>>> ").lower() 
         if de_novo == "s":
             entrada_valida = False
         elif de_novo == "n":
