@@ -218,9 +218,9 @@ while jogo:
                 else:
                     cor = "blue"
 
-                distancia_str = str(round(pais[1])) #string que guarda a distancia do pais atual
-                distancia_com_ponto = "" #string que guarda a distancia do pais atual usando pontos a cada tres numeros
-                contador = 0 #variavel que conta o numero de caracteres (quando eh igual a 3, eh adicionado um ponto)
+                distancia_str = str(round(pais[1])) # string que guarda a distância do pais atual
+                distancia_com_ponto = "" # string que guarda a distância do país atual usando pontos a cada três números
+                contador = 0 # variável que conta o número de caracteres (quando é igual a 3, é adicionado um ponto)
                 for numero in range(len(distancia_str) -1, -1, -1):
                     if contador == 3:
                         distancia_com_ponto = "." + distancia_com_ponto
