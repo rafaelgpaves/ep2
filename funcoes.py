@@ -109,7 +109,7 @@ def tabela_dicas(tentativas, dict_true):
     print(colored("\nMERCADO DE DICAS", "white", attrs=["bold"]))
     print(x)
 
-def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, dict_porcentagens):
+def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, continente_certo, dict_porcentagens, area_com_pontos, populacao_com_pontos):
     
     if len(cores_ja_informadas) != 0:
         texto = []
@@ -121,10 +121,10 @@ def imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paise
         print(" - Letras da capital: " + ", ".join(letras_ja_informadas))
 
     if status_dicas["Área"] == False:
-        print(" - Área: {} km2".format(paises[pais_sorteado]["area"]))
+        print(" - Área: {} km2".format(area_com_pontos))
 
     if status_dicas["População"] == False:
-        print(" - População: {} habitantes".format(paises[pais_sorteado]["populacao"]))
+        print(" - População: {} habitantes".format(populacao_com_pontos))
 
     if status_dicas["Continente"] == False:
         print(" - Continente: " + continente_certo)

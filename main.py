@@ -151,8 +151,16 @@ while jogo:
                                 print("\nDesculpa, mas você já perguntou a área do país!")
                             else:
                                 tentativas -= 6
-                                area = paises[pais_sorteado]["area"]
-                                print("\nA área do país sorteado é de {0} km2.".format(area))
+                                area = str(paises[pais_sorteado]["area"])
+                                area_com_ponto = "" #string que guarda a populacao do pais atual usando pontos a cada tres numeros
+                                contador = 0
+                                for numero in range(len(area) -1, -1, -1):
+                                    if contador == 3:
+                                        area_com_ponto = "." + area_com_ponto
+                                        contador = 0
+                                    area_com_ponto = area[numero] + area_com_ponto
+                                    contador += 1
+                                print("\nA área do país sorteado é de {0} km2.".format(area_com_ponto))
                                 status_dicas["Área"] = False
                         else:
                             print("\nDesculpa, mas você não tem tentativas suficientes.")
@@ -164,8 +172,16 @@ while jogo:
                                 print("\nDesculpa, mas você já perguntou a população do país!")
                             else:
                                 tentativas -= 5
-                                populacao = paises[pais_sorteado]["populacao"]
-                                print("\nA população do país sorteado é de {0} habitantes.".format(populacao))
+                                populacao = str(paises[pais_sorteado]["populacao"])
+                                populacao_com_ponto = "" #string que guarda a populacao do pais atual usando pontos a cada tres numeros
+                                contador = 0
+                                for numero in range(len(populacao) -1, -1, -1):
+                                    if contador == 3:
+                                        populacao_com_ponto = "." + populacao_com_ponto
+                                        contador = 0
+                                    populacao_com_ponto = populacao[numero] + populacao_com_ponto
+                                    contador += 1
+                                print("\nA população do país sorteado é de {0} habitantes.".format(populacao_com_ponto))
                                 status_dicas["População"] = False
                         else:
                             print("\nDesculpa, mas você não tem tentativas suficientes.")
@@ -215,7 +231,7 @@ while jogo:
                 print(colored("{} km --> {}".format(distancia_com_ponto, pais[0]), cor, attrs=["bold"]))
 
             print("\nDicas: ")
-            imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, porcentagens)
+            imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, continente_certo, porcentagens, area_com_ponto, populacao_com_ponto)
         
         else:
 
@@ -260,7 +276,7 @@ while jogo:
 
                 # imprimindo as dicas
                 print("\nDicas: ")
-                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, paises, pais_sorteado, continente_certo, porcentagens)
+                imprime_dicas(cores_ja_informadas, letras_ja_informadas, status_dicas, continente_certo, porcentagens, area_com_ponto, populacao_com_ponto)
 
             elif entrada in paises and esta_na_lista(entrada, paises_e_distancias) == True:
 
