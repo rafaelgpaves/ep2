@@ -47,6 +47,8 @@ while jogo:
     letras_capital = 0 # total de letras na capital
     for letra in paises[pais_sorteado]["capital"]:
         letras_capital += 1
+    area_com_ponto = "" #string que guarda a populacao do pais atual usando pontos a cada tres numeros (dica 3)
+    populacao_com_ponto = "" #string que guarda a populacao do pais atual usando pontos a cada tres numeros (dica 4)
     dicas_solicitadas = [] # dicas (gerais) já informadas ao jogador pelo sistema
 
     # criando uma lista com as cores da bandeira do país sorteado
@@ -152,7 +154,6 @@ while jogo:
                             else:
                                 tentativas -= 6
                                 area = str(paises[pais_sorteado]["area"])
-                                area_com_ponto = "" #string que guarda a populacao do pais atual usando pontos a cada tres numeros
                                 contador = 0
                                 for numero in range(len(area) -1, -1, -1):
                                     if contador == 3:
@@ -173,7 +174,6 @@ while jogo:
                             else:
                                 tentativas -= 5
                                 populacao = str(paises[pais_sorteado]["populacao"])
-                                populacao_com_ponto = "" #string que guarda a populacao do pais atual usando pontos a cada tres numeros
                                 contador = 0
                                 for numero in range(len(populacao) -1, -1, -1):
                                     if contador == 3:
