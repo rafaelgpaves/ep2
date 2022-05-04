@@ -99,6 +99,22 @@ def sorteia_pais(paises):
 
 ###
 
+def opcoes(tentativas, status_dicas):
+    opcoes = "[" + "1|" + "2|" + "3|" + "4|" + "5|" + "0" + "]"
+    if status_dicas["Cor da Bandeira"] == False or tentativas <= 4:
+        opcoes = opcoes.replace("1|", "")
+    if status_dicas["Letra da capital"] == False or tentativas <= 3:
+        opcoes = opcoes.replace("2|", "")
+    if status_dicas["Área"] == False or tentativas <= 6:
+        opcoes = opcoes.replace("3|", "")
+    if status_dicas["População"] == False or tentativas <= 5:
+        opcoes = opcoes.replace("4|", "")
+    if status_dicas["Continente"] == False or tentativas <= 7:
+        opcoes = opcoes.replace("5|", "")
+    return opcoes
+
+###
+
 def tabela_dicas(tentativas, dict_true):
     banco_de_dicas = {1: ["Cor da Bandeira", 4], 2: ["Letra da capital", 3], 3: ["Área", 6], 4: ["População", 5], 5: ["Continente", 7], 0: ["Sem dica", 0]}
     x = PrettyTable()

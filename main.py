@@ -19,7 +19,7 @@ print("|" + (" " * 18) + "|")
 print("|" + (" " * 1) + colored("Aᴅɪᴠɪɴʜᴇ ᴏ ᴘᴀís!", "cyan", attrs=["bold"]) + (" " * 1) +"|")
 print("|" + (" " * 18) + "|")
 print(" " + ("=" * 18) + " ")
-print("ᴘᴏʀ Bʀᴜɴᴏ Zᴀʟᴄʙᴇʀɢ ᴇ Rᴀғᴀᴇʟ Gᴏʀᴅᴏɴ Pᴀᴠᴇs")
+print("por Bruno Zalcberg e Rafael Gordon Paves")
 
 # printando os comandos:
 print("\n")
@@ -105,7 +105,7 @@ while jogo:
 
             tabela_dicas(tentativas, status_dicas)
             while True:
-                dica_escolhida = input("\nEscolha uma dica! [1|2|3|4|5|0]\n>>> ")
+                dica_escolhida = input("\nEscolha uma dica! " + opcoes(tentativas, status_dicas) + "\n>>> ")
                 if dica_escolhida not in ("1", "2", "3", "4", "5", "0"):
                     print("\nDesculpe, mas esse input é inválido\n")
                     continue
