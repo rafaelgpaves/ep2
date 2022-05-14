@@ -1,6 +1,7 @@
 """importando funcoes e os dados dos paises:"""
 from funcoes import *
 import json
+import emoji
 
 with open("dados.json", "r") as arquivo:
     dados = arquivo.read()
@@ -97,7 +98,7 @@ while jogo:
         entrada = input("Qual o seu palpite?\n>>> ").lower()
         if entrada == "desisto":
 
-            print("O país era {}".format(pais_sorteado.title()))
+            print("\nO país era {}".format(pais_sorteado.title()))
 
             rodada = False
 
@@ -292,7 +293,8 @@ while jogo:
         if de_novo == "s":
             entrada_valida = False
         elif de_novo == "n":
-            print("\nObrigado por jogar!\n")
+            print("\nObrigado por jogar! " + emoji.emojize(":grinning_face_with_smiling_eyes:\n"))
+            
             entrada_valida = False
             jogo = False
         else:
